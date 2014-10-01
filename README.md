@@ -10,6 +10,7 @@ npm start
 ```
 
 ## Use
+Make sure you have http://localhost setup as a valid redirect URI in your oauth application settings
 Visit [http://localhost:3300](http://localhost:3300)
 
 1. Fill out the form with the required service parameters and your application details

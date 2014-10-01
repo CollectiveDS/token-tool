@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Token Tool</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="col-md-3">
+      <h3>Saved Credentials</h3><hr />
+      <ul id="saved-creds" class="list-group">
+        <li class="list-group-item">Nothing saved yet</li>
+      </ul>
+    </div>
+    <form action="/request" class="form form-horizontal col-md-9">
+      <h3>Enter Application Details &amp; Service Parameters</h3><hr />
+      <label>Client ID:</label>
+      <input type="text" class="form-control" name="clientId" placeholder="Oauth Client ID" /><br />
+      <label>Client Secret:</label>
+      <input type="text" class="form-control" name="clientSecret" placeholder="Oauth Client Secret" /><br />
+      <label>OAuth URI:</label>
+      <input type="text" class="form-control" name="oauthURL" placeholder="OAuth URL" /><br />
+      <label>Scope</label>
+      <input type="text" class="form-control" name="scope" placeholder="scope (comma separated)" /><br />
+      <label>Access Type:</label>
+      <input type="text" class="form-control" name="access_type" placeholder="Access type" value="offline" /><br />
+      <label>Response Type:</label>
+      <input type="text" class="form-control" name="response_type" placeholder="Response type" value="code" /><br />
+      <label>Token Request URI</label>
+      <input type="text" class="form-control" name="tokenURI" placeholder="Token Request URI e.g. https://accounts.google.com/o/oauth2/token" /><br />
+      <label>Redirect URI:</label>
+      <input type="text" class="form-control" name="redirectURI" placeholder="Redirect URI" value="http://localhost:3300/code" /><br />
+      <div class="pull-right">
+        <button class="btn btn-success" id="save"><span class="glyphicon glyphicon-floppy-disk"></span> Save Credentials</button>
+        <button type="submit" class="btn btn-primary" value="Request Login"><span class="glyphicon glyphicon-user"></span> Get Access Token</button>
+      </div>
+      <br /><br />
+    </form>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>

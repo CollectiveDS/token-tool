@@ -1,9 +1,15 @@
 var express = require('express');
+var fs      = require('fs');
+var https   = require('https');
 var session = require('express-session');
 var request = require('request');
 var querystring = require('querystring');
 var url = require('url');
+var privateKey  = fs.readFileSync('cert/key.pem', 'utf8');
+var certificate = fs.readFileSync('cert/cert.pem', 'utf8');
 var app     = express();
+var credentials = {key: privateKey, cert: certificate};
+var httpsServer = https.createServer(credentials, app);
 
 app.use(express.static('public'));
 app.use(session({
@@ -63,3 +69,4 @@ app.get('/code', function(req, res){
 
 var port = process.env.PORT || 3300;
 app.listen(port);
+httpsServer.listen(443);

@@ -6,12 +6,13 @@ npm install
 
 ## Run
 ```
-npm start
+# need to run as sudo b/c app listens on port 443
+sudo npm start
 ```
 
 ## Use
-Make sure you have http://localhost setup as a valid redirect URI in your oauth application settings
-Visit [http://localhost:3300](http://localhost:3300)
+Make sure you have https://localhost setup as a valid redirect URI in your oauth application settings
+Visit [https://localhost](https://localhost)
 
 1. Fill out the form with the required service parameters and your application details
 2. Click "Save Credentials" if you want to store those credentials for reuse

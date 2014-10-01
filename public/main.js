@@ -5,23 +5,25 @@
   var store = window.localStorage;
   var creds = JSON.parse(store.getItem(storageKey)) || {};
 
-  var serialize = function(form){
-    var inputs = Array.prototype.slice.call(form.querySelectorAll('input[type="text"]'), 0);
-    var serialized = [];
-    inputs.forEach(function(input){
-      serialized.push(input.name + '=' + input.value);
-    });
-    return serialized.join('&');
+  var util = {
+    serialize: function(form){
+      var inputs = Array.prototype.slice.call(form.querySelectorAll('input[type="text"]'), 0);
+      var serialized = [];
+      inputs.forEach(function(input){
+        serialized.push(input.name + '=' + input.value);
+      });
+      return serialized.join('&');
+    },
+    unserialize: function(str){
+      var out = {};
+      var split = str.split('&');
+      split.forEach(function(pair){
+        var keyVal = pair.split('=');
+        out[keyVal[0]] = keyVal[1];
+      });
+      return out;
+    }
   };
-  var unserialize = function(str){
-    var out = {};
-    var split = str.split('&');
-    split.forEach(function(pair){
-      var keyVal = pair.split('=');
-      out[keyVal[0]] = keyVal[1];
-    });
-    return out;
-  }
 
   var appendSavedCreds = function(creds){
     var saved = document.querySelector('#saved-creds');
@@ -42,6 +44,7 @@
     }
   };
 
+  // add currently saved creds
   appendSavedCreds(creds);
 
   document.querySelector('#saved-creds').addEventListener('click', function(e){
@@ -52,7 +55,7 @@
       store.setItem(storageKey, JSON.stringify(creds));
       appendSavedCreds(creds);
     } else if(target.id){ // list item, load up the stored values
-      var credentials = unserialize(creds[target.id]);
+      var credentials = util.unserialize(creds[target.id]);
       for(var item in credentials){
         form[item].value = credentials[item];
       }
@@ -62,12 +65,12 @@
   save.addEventListener('click', function(e){
     var credName = window.prompt("Enter a name for these credentials") || 'creds-'+Math.floor(Math.random()*100);
 
-    creds[credName] = serialize(form);
+    creds[credName] = util.serialize(form);
     store.setItem(storageKey, JSON.stringify(creds));
 
     appendSavedCreds(creds);
 
     e.preventDefault();
     return false;
-  });
+  }, false);
 })(window, document);

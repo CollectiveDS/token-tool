@@ -1,6 +1,6 @@
 ## Install
 ```
-git clone git@github.com:rmcvey/token-tool.git
+git clone git@github.com:CollectiveDS/token-tool.git
 npm install
 ```
 
